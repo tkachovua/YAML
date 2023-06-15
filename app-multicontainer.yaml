@@ -1,7 +1,7 @@
 ---
 apiVersion: v1
 kind: Pod
-metadata:
+metadata: #визначає метадані для Pod. У даному випадку, встановлене ім'я Pod як "app-multi-containers".
   name: app-multi-containers
 spec:
   volumes:
@@ -24,3 +24,7 @@ spec:
             date >> /html/index.html;
             sleep 1;
           done
+#цей маніфест описує створення Kubernetes-поду з двома контейнерами: 
+#перший використовує образ Nginx і монтує тимчасовий том "html" до /usr/share/nginx/html, 
+#а другий використовує образ Debian і монтує той самий тимчасовий том до /html, 
+#виконуючи безкінечний цикл для запису поточної дати до файлу /html/index.html.
