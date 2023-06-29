@@ -1,6 +1,3 @@
-# YAML
-
-
 | NAME | PROMPT | DESCRIPTION | EXAMPLE |
 |------|--------|-------------|---------|
 | app.yaml | create an nginx deployment with 3 replicas | Defines the main deployment of the application, its containers, and configurations. | [app.yaml](app.yaml)|
