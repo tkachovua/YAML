@@ -1,24 +1,11 @@
-#LivenessProbe потрібні щоб знати коли контейнер перестав діяти, видалити та перезапустити його
----
+
 apiVersion: v1
 kind: Pod
 metadata:
-  name: app
-  namespace: demo
-  labels:
-    app: demo
+  name: nginx-live-check
 spec:
   containers:
-    - image: gcr.io/k8s-k3s-386915/demo:v1.0.0
-      name: app
-      livenessProbe:
-        httpGet:
-          path: /
-          port: 8080
-        initialDelaySeconds: 5
-        timeoutSeconds: 1
-        periodSeconds: 10
-        failureThreshold: 3
-      ports:
-        - containerPort: 8080
-          name: http
+  - name: nginx-live-check
+    image: nginx
+    args: ["/bin/sh", "-c", "while true; do curl -I http://localhost; sleep 60; done"]
+  restartPolicy: Always
