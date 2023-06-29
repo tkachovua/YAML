@@ -1,30 +1,13 @@
----
+
 apiVersion: v1
 kind: Pod
-metadata: #визначає метадані для Pod. У даному випадку, встановлене ім'я Pod як "app-multi-containers".
-  name: app-multi-containers
+metadata:
+  name: nginx-multicontainer
 spec:
-  volumes:
-    - name: html
-      emptyDir: {}
   containers:
-    - name: 1st
-      image: nginx
-      volumeMounts:
-        - name: html
-          mountPath: /usr/share/nginx/html
-    - name: 2nd
-      image: debian
-      volumeMounts:
-        - name: html
-          mountPath: /html
-      command: ["/bin/sh", "-c"]
-      args:
-        - while true; do
-            date >> /html/index.html;
-            sleep 1;
-          done
-#цей маніфест описує створення Kubernetes-поду з двома контейнерами: 
-#перший використовує образ Nginx і монтує тимчасовий том "html" до /usr/share/nginx/html, 
-#а другий використовує образ Debian і монтує той самий тимчасовий том до /html, 
-#виконуючи безкінечний цикл для запису поточної дати до файлу /html/index.html.
+  - name: nginx
+    image: nginx
+  - name: debian
+    image: debian
+  - name: freebsd
+    image: freebsd
